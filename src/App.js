@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./App.css";
 
 const cardImages = [
@@ -10,10 +11,22 @@ const cardImages = [
 ];
 
 function App() {
+  const [cards, setCards] = useState([]);
+  const [turns, setTurns] = useState(0);
+
+  const shuffleCards = () => {
+    const shuffledCards = [...cardImages, ...cardImages]
+      .sort(() => Math.random() - 0.5)
+      .map((card) => ({ ...card, id: Math.random() }));
+
+    setCards(shuffledCards);
+    setTurns(0);
+  };
+
   return (
     <div className="App">
       <h1>Memory game</h1>
-      <button>Nowa gra</button>
+      <button onClick={shuffleCards}>Nowa gra</button>
     </div>
   );
 }
