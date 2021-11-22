@@ -1,19 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import Card from "./components/Card";
 
 const cardImages = [
-  { src: "/img/Chase_PNG.png" },
-  { src: "/img/Everest_sitinig.png" },
-  { src: "/img/Marshall.png" },
-  { src: "/img/Rubble.png" },
-  { src: "/img/Skye.png" },
-  { src: "/img/Zuma.png" },
+  { src: "/img/Chase_PNG.png", matched: false },
+  { src: "/img/Everest_sitinig.png", matched: false },
+  { src: "/img/Marshall.png", matched: false },
+  { src: "/img/Rubble.png", matched: false },
+  { src: "/img/Skye.png", matched: false },
+  { src: "/img/Zuma.png", matched: false },
 ];
 
 function App() {
   const [cards, setCards] = useState([]);
   const [turns, setTurns] = useState(0);
+  const [choiceOne, setChoiceOne] = useState(null);
+  const [choiceTwo, setChoiceTwo] = useState(null);
 
   const shuffleCards = () => {
     const shuffledCards = [...cardImages, ...cardImages]
@@ -23,7 +25,35 @@ function App() {
     setCards(shuffledCards);
     setTurns(0);
   };
-  console.log(cards, turns);
+
+  const handleChoice = (card) => {
+    choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
+  };
+
+  useEffect(() => {
+    if (choiceOne && choiceTwo) {
+      if (choiceOne.src === choiceTwo.src) {
+        setCards((prevState) => {
+          return prevState.map((card) => {
+            if (card.src === choiceOne.src) {
+              return { ...card, matched: true };
+            } else {
+              return card;
+            }
+          });
+        });
+        resetTurn();
+      } else {
+        resetTurn();
+      }
+    }
+  }, [choiceOne, choiceTwo]);
+
+  const resetTurn = () => {
+    setChoiceOne(null);
+    setChoiceTwo(null);
+    setTurns((prevState) => prevState + 1);
+  };
 
   return (
     <div className="App">
@@ -32,7 +62,7 @@ function App() {
 
       <div className="card-grid">
         {cards.map((card) => (
-          <Card key={card.id} card={card} />
+          <Card key={card.id} card={card} handleChoice={handleChoice} />
         ))}
       </div>
     </div>
