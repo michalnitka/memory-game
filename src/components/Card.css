@@ -1,8 +1,14 @@
 .card {
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   object-fit: contain;
+}
+@media screen and (min-width: 1367px) {
+  .card{
+    width: 180px;
+    height: 180px;
+  }
 }
 
 .card img {
@@ -10,4 +16,22 @@
   display: block;
   border: 2px solid #fff;
   border-radius: 6px;
+}
+.card .front{
+  transform: rotateY(90deg);
+  position: absolute;
+  transition: all ease-in 0.2s;
+}
+.flipped .front{
+  transform: rotateY(0deg);
+  transition-delay: 0.2s;
+}
+
+.card .cover{
+  transition: all ease-in 0.2s;
+  transition-delay: 0.2s;
+}
+.flipped .cover{
+  transform: rotateY(90deg);
+  transition-delay: 0s;
 }
