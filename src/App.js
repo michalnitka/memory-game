@@ -3,12 +3,12 @@ import "./App.css";
 import Card from "./components/Card";
 
 const cardImages = [
-  { src: "/img/Chase_PNG.png", matched: false },
-  { src: "/img/Everest_sitinig.png", matched: false },
-  { src: "/img/Marshall.png", matched: false },
-  { src: "/img/Rubble.png", matched: false },
-  { src: "/img/Skye.png", matched: false },
-  { src: "/img/Zuma.png", matched: false },
+  { src: "./img/Chase_PNG.png", matched: false },
+  { src: "./img/Everest_sitinig.png", matched: false },
+  { src: "./img/Marshall.png", matched: false },
+  { src: "./img/Rubble.png", matched: false },
+  { src: "./img/Skye.png", matched: false },
+  { src: "./img/Zuma.png", matched: false },
 ];
 
 function App() {
